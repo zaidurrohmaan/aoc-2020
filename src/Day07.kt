@@ -40,21 +40,15 @@ fun main() {
 
             contents.split(", ").forEach {bag ->
                 val inner = bag.substringAfter(" ").substringBefore(" bag")
-                val amount = bag.replace(" " + inner + bag.substringAfter(inner), "").trim().toInt()
+                val amount = bag.substringBefore(" ").toInt()
                 contentsOf.getOrPut(outer) { mutableListOf() }.add(Pair(inner, amount))
             }
         }
 
         fun numOfChild(bag: String): Int {
-            if (contentsOf[bag]!!.isEmpty()) return 0
-
-            var num = 0
-            for (child in contentsOf[bag]!!) {
-                num += child.second
-                num += child.second * numOfChild(child.first)
-            }
-
-            return num
+            return contentsOf[bag]?.sumOf { (inner, amount) ->
+                amount + amount * numOfChild(inner)
+            } ?: 0
         }
 
         return numOfChild("shiny gold")
