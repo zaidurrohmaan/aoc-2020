@@ -6,7 +6,7 @@ fun main() {
 
         val visited = MutableList(input.size) { false }
 
-        while(idx in 0 until input.size && !visited[idx]) {
+        while(idx in input.indices && !visited[idx]) {
             visited[idx] = true
             val (op, value) = input[idx].split(" ")
 
@@ -95,7 +95,7 @@ fun main() {
 
         val visited = MutableList(input.size) { false }
 
-        while(idx in 0 until input.size && !visited[idx]) {
+        while(idx in input.indices && !visited[idx]) {
             visited[idx] = true
             val (op, value) = input[idx].split(" ")
 
